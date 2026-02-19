@@ -1,0 +1,45 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test files
+*.test
+*.out
+*.cover
+coverage.out
+
+# Exports
+exports/
+
+# Playwright data
+user_data/
+
+# Dependencies
+vendor/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go workspace
+go.work
+go.work.sum
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local

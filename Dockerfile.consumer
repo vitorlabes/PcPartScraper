@@ -1,0 +1,28 @@
+# Stage 1: Builder
+FROM golang:1.22-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache git
+
+# Copy go mod
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy code
+COPY . .
+
+# Build consumer
+RUN CGO_ENABLED=0 GOOS=linux go build -o /consumer cmd/consumer/main.go
+
+# Stage 2: Runtime
+FROM alpine:latest
+
+WORKDIR /app
+
+RUN apk --no-cache add ca-certificates
+
+COPY --from=builder /consumer .
+
+ENTRYPOINT ["./consumer"]
